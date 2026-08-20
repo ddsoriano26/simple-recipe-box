@@ -30,17 +30,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-show="loading || !recipe">Loading...</div>
-  <div v-show="!loading" class="container">
-    <text>{{ recipe?.strMeal }}</text>
-    <text>{{ recipe?.strCountry }}</text>
-    <text>{{ recipe?.strInstructions }}</text>
-  </div>
+  <main>
+    <div v-show="loading || !recipe">Loading...</div>
+    <div v-show="!loading" class="container">
+      <img v-bind:src="recipe?.strMealThumb" />
+      <text>{{ recipe?.strMeal }}</text>
+      <button>Favorite this recipe</button>
+      <text>{{ recipe?.strCountry }}</text>
+      <text>{{ recipe?.strInstructions }}</text>
+    </div>
+  </main>
 </template>
 
 <style scoped>
+main {
+  padding: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+
+img {
+  width: 300px;
+  max-height: auto;
+}
+
+button {
+  max-width: fit-content;
+}
+button:hover {
+  cursor: pointer;
 }
 </style>
