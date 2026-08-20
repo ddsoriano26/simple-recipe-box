@@ -33,7 +33,7 @@ onMounted(() => {
   <div v-show="loading || !recipe">Loading...</div>
   <div v-show="!loading" class="container">
     <text>{{ recipe?.strMeal }}</text>
-    <text>{{ `${recipe?.strArea}, ${recipe?.strCountry}` }}</text>
+    <text>{{ recipe?.strCountry }}</text>
     <text>{{ recipe?.strInstructions }}</text>
   </div>
 </template>
