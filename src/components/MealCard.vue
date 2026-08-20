@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Meal } from '@/utils/types'
+import { RouterLink } from 'vue-router'
 
 defineProps<{
   meal: Meal
@@ -8,10 +9,12 @@ defineProps<{
 
 <template>
   <main>
-    <img v-bind:src="meal.strMealThumb" />
-    <div class="name">
-      <text>{{ meal.strMeal }}</text>
-    </div>
+    <RouterLink :to="{ name: 'MealRecipe', params: { id: meal.idMeal } }">
+      <img v-bind:src="meal.strMealThumb" />
+      <div class="name">
+        <text>{{ meal.strMeal }}</text>
+      </div>
+    </RouterLink>
   </main>
 </template>
 
@@ -22,6 +25,7 @@ main {
   overflow: auto;
   height: 200px;
   width: 300px;
+  cursor: pointer;
 }
 
 img {
@@ -33,12 +37,18 @@ img {
 
 .name {
   display: flex;
-  width: 100%;
+  max-width: 100%;
   height: auto;
   max-height: 20%;
   justify-content: center;
   align-items: center;
   padding: 5px 10px;
   align-content: center;
+}
+
+text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
