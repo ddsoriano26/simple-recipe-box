@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRecipeStore } from '@/stores/recipe'
 import type { Recipe } from '@/utils/types'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -8,6 +9,8 @@ const id = route.params.id
 const loading = ref(false)
 
 const recipe = ref<Recipe>()
+
+const recipeStore = useRecipeStore()
 
 async function fetchRecipe() {
   loading.value = true
@@ -24,6 +27,11 @@ async function fetchRecipe() {
   loading.value = false
 }
 
+function favoriteRecipe() {
+  if (recipe.value) recipeStore.addToFavorites(recipe.value?.idMeal)
+  else console.log('Recipe does not exist!')
+}
+
 onMounted(() => {
   fetchRecipe()
 })
@@ -35,7 +43,7 @@ onMounted(() => {
     <div v-show="!loading" class="container">
       <img v-bind:src="recipe?.strMealThumb" />
       <text>{{ recipe?.strMeal }}</text>
-      <button>Favorite this recipe</button>
+      <button @click="favoriteRecipe">Favorite this recipe</button>
       <text>{{ recipe?.strCountry }}</text>
       <text>{{ recipe?.strInstructions }}</text>
     </div>
