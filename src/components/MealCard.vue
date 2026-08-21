@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Meal } from '@/utils/types'
+import type { Meal, Recipe } from '@/utils/types'
 import { RouterLink } from 'vue-router'
 
 defineProps<{
-  meal: Meal
+  meal: Meal | Recipe
 }>()
 </script>
 
